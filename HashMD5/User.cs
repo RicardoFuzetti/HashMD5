@@ -48,7 +48,7 @@ namespace HashMD5
                     objStreamWriter = File.AppendText(strFile);
 
                     //Escrevendo
-                    objStreamWriter.WriteLine(StrUsername + ";" + ExtensionMD5.HashingMD5(StrPassword));
+                    objStreamWriter.WriteLine($"{StrUsername}-{ExtensionMD5.HashingMD5(StrPassword)}");
                     objStreamWriter.Close();
                 }
                 else

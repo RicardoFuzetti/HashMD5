@@ -11,14 +11,13 @@ namespace HashMD5
     {
         public static string HashingMD5(string strInput)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            byte[] bytPassword = Encoding.ASCII.GetBytes(strInput);
+            StringBuilder stringBuilder = new StringBuilder(); //CONCATENAÇÃO NA STRING
             using (MD5 objMD5 = MD5.Create())
             {
-                byte[] computeHash = objMD5.ComputeHash(bytPassword);
-                for (int i = 0; i < computeHash.Length; i++)
+                byte[] bytData = objMD5.ComputeHash(Encoding.ASCII.GetBytes(strInput)); //Armazena quantidade de bytes do input
+                for (int i = 0; i < bytData.Length; i++)
                 {
-                    stringBuilder.Append(computeHash[i].ToString("x2"));
+                    stringBuilder.Append(bytData[i].ToString("x2")); //Armazena em hexadecimal de 2 em 2 caracteres
                 }
             }
             return stringBuilder.ToString();

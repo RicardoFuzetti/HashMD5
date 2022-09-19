@@ -12,11 +12,11 @@ namespace HashMD5
         public static void CompareHash(Dictionary<string, string> passowrdList, Dictionary<string, string> userList)
         {
             Console.WriteLine();
-            foreach (KeyValuePair<string, string> cu in userList)
+            foreach (KeyValuePair<string, string> users in userList)
             {
-                if (passowrdList.ContainsValue(cu.Value))
+                if (passowrdList.ContainsValue(users.Value))
                 {
-                    Console.WriteLine($"{cu.Key} -> {passowrdList.Where(x => x.Value == cu.Value).FirstOrDefault().Key}");
+                    Console.WriteLine($"{users.Key} -> {passowrdList.Where(x => x.Value == users.Value).FirstOrDefault().Key}");
                 }
             }
         }
@@ -28,13 +28,12 @@ namespace HashMD5
                 Dictionary<string, string> userList = new Dictionary<string, string>();
                 string line = null;
 
-                while ((line = file.ReadLine()) != null)
+                while ((line = file.ReadLine()) != null) //Lendo as linhas do arquivo
                 {
-                    if (!userList.ContainsKey(line.Split(';')[0]))
+                    if (!userList.ContainsKey(line.Split('-')[0])) //Verificando se o valor é duplicado
                     {
-                        userList.Add(line.Split(';')[0], line.Split(';')[1]);
+                        userList.Add(line.Split('-')[0], line.Split('-')[1]); //Salva usuário e senha
                     }
-
                 }
                 return userList;
             }
@@ -48,11 +47,11 @@ namespace HashMD5
 
                 string line = null;
 
-                while ((line = file.ReadLine()) != null)
+                while ((line = file.ReadLine()) != null) //Lendo as linhas do arquivo
                 {
-                    if (!passwordList.ContainsKey(line))
+                    if (!passwordList.ContainsKey(line)) //Verificando se o valor é duplicado
                     {
-                        passwordList.Add(line, ExtensionMD5.HashingMD5(line));
+                        passwordList.Add(line, ExtensionMD5.HashingMD5(line)); //Salva a senha normal e em HASH MD5
                     }
                 }
                 return passwordList;
